@@ -14,7 +14,7 @@ public class ProjectSecurityConfig {
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrfConfig -> csrfConfig.disable()).authorizeHttpRequests((requests) -> {
             requests.requestMatchers("/myAccount").hasRole("ADMIN")
-                    .requestMatchers("/myBalance").hasAnyRole("ADMIN","SALES")
+                    .requestMatchers("/myBalance", "/auth").hasAnyRole("ADMIN","SALES")
                     .requestMatchers("/contact", "/register").permitAll();
         });
         http.formLogin(Customizer.withDefaults());
